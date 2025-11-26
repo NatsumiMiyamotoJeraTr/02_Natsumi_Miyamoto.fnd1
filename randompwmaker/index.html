@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="./style.css">
+  <title>ランダムパスワード生成</title>
+</head>
+
+<body class="wrap">
+  <div class="container">
+    <h1>パスワードメイカー</h1>
+    <p>生成したいパスワードの文字数を入力してください</p>
+    <input type="number" class="inputarea" placeholder="1以上50以下の整数を入力">
+    <button class="eight-btn">8文字</button>
+    <button class="twelve-btn">12文字</button>
+    <p>以下を含ませたい場合はチェック(複数チェック可)</p>
+    <input type="checkbox" class="upper-en-btn">英字(大文字)
+    <input type="checkbox" class="lower-en-btn">英字(小文字)
+    <input type="checkbox" class="mark-btn">記号
+    <p>デフォルトは数字のみです。<br>50文字以下までの長さで生成できます。</p>
+    <p>
+      <button class="generate-btn">生成</button>
+    </p>
+  </div>
+
+  <!-- パスワード表示エリア -->
+  <div class="show-password-box">
+    <span class="show-password-text">ここに表示されます</span>
+    <button class="copy-btn">コピー</button>
+  </div>
+  <p><a href="../index.html">ホームへ戻る</a></p>
+  <!-- htmlが全部読み込まれた後に実行 -->
+  <script src="./script.js"></script>
+</body>
+
+</html>
