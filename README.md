@@ -25,7 +25,7 @@
 ---
 
 ## 公開URL  
-[👉 https://<username>.github.io/<repository>/](https://natsumimiyamotojeratr.github.io/NatsumiMiyamotoJeraTr.fnd01/index.html)
+[https://<username>.github.io/<repository>/](https://natsumimiyamotojeratr.github.io/NatsumiMiyamotoJeraTr.fnd01/index.html)
 
 ---
 
