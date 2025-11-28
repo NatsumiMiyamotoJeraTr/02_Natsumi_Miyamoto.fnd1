@@ -1,6 +1,18 @@
-# My Tools Web App
+# シンプルWebツール集
 
-学習用に作成した、シンプルなWebツール集です。
+シンプルなWebツール集です。
+トップページから各ツールへ飛べます。
+文字数カウンター、パスワード生成ツール、ToDoリストの3種
+
+---
+
+## ToDoリスト  
+タスクを追加し、完了・削除ができるシンプルなタスク管理機能です。  
+ブラウザの localStorage に保存し、再読み込み後もタスクを保持します。
+
+**機能**
+- タスクの追加・完了・削除
+- localStorageによるデータ保持
 
 ---
 
@@ -18,14 +30,14 @@
 指定した文字数と条件に応じて、ランダムなパスワードを作成します。
 
 **機能**
-- パスワードの文字数を指定
+- パスワードの文字数を指定可
 - 英字(大文字・小文字)・記号の追加可
 - コピー機能
 
 ---
 
 ## 公開URL  
-[https://<username>.github.io/<repository>/](https://natsumimiyamotojeratr.github.io/NatsumiMiyamotoJeraTr.fnd01/index.html)
+https://natsumimiyamotojeratr.github.io/NatsumiMiyamotoJeraTr.fnd01/index.html
 
 ---
 
@@ -33,5 +45,3 @@
 - HTML
 - CSS
 - JavaScript
-
----
