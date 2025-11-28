@@ -15,6 +15,10 @@ addTaskBtn.addEventListener("click", () => {
     alert("タスクを入力してください");
     return;
   }
+  if (inputText.length > 50) {
+    alert("タスクは50文字以内にしてください");
+    return;
+  }
   // <li>、<span>要素を追加する
   const li = document.createElement("li");
   const taskSpan = document.createElement("span"); // ボタンとテキストを分離させて、長さ調節を細かく行えるようにする
