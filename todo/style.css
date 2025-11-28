@@ -1,0 +1,65 @@
+body.wrap {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #f4f4f4;
+}
+
+.container {
+  background: #fff;
+  padding: 20px;
+  margin-top: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* リスト全体 */
+ul {
+  list-style-type: none;
+  background-color: whitesmoke;
+  border: 2px silver dashed;
+}
+
+/* 各タスク */
+ul li {
+  display: flex; /* 子要素(li)を横並びにする */
+  justify-content: space-between; /* 両端ぞろえ */
+  align-items: center;
+  padding: 6px 10px;
+  border-bottom: 1px solid #ddd; /* 線で区切る */
+}
+
+/* タスク内容を左寄せ、可変長に */
+ul li span {
+  flex: 1; /* ul li を余白いっぱい(完了ボタンのスペースギリギリ)まで伸ばせる */
+  text-align: left;
+  margin-right: 10px; /* 完了ボタンとの間に隙間あける */
+}
+
+/* テキスト入力欄 */
+.inputarea {
+  width: 60%;
+  padding: 8px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* ボタン */
+.btn {
+  padding: 8px 12px;
+  margin: 5px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  flex-shrink: 0; /* タスク文字長をflex:1 にしてるので、その影響でボタンの大きさが縮まらないように */
+}
+
+li .done {
+  text-decoration: line-through; /* 取り消し線 */
+  opacity: 0.6; /* 少し薄くする */
+}
