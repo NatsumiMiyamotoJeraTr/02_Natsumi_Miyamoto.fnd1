@@ -31,6 +31,14 @@ btn12.addEventListener("click", () => {
   const lowerLetters = "abcdefghijklmnopqrstuvwxyz";
   const marks = "!@#$%^&*()_+-=[]{};:,.<>?";
 
+
+// Enterでも追加できる
+lengthInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    generateBtn.click(); // clickされたときと同じ処理を呼び出す
+  }
+});
+
 // ---- 生成ボタン ----
 generateBtn.addEventListener("click", () => {
   const len = Number(lengthInput.value);
