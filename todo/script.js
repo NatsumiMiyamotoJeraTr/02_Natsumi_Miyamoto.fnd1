@@ -1,62 +1,77 @@
-// localStrage保存用関数
+// ===============================
+// DOMまとめて取得
+// ===============================
+const input = document.querySelector(".inputarea");
+const addTaskBtn = document.querySelector("#addtask");
+const ul = document.querySelector("ul");
+
+
+// ===============================
+// localStorage保存処理
+// ===============================
 const saveTasks = () => {
   const tasks = document.querySelectorAll("li");
   const taskSaveArr = [];
 
   tasks.forEach(li => {
-    const textContent = li.childNodes[0].innerText;
-    const isDone = li.childNodes[0].classList.contains("done") // li01.childNodes[0].classList ---> DOMTokenList ['done', value: 'done'];
+    const textContent = li.querySelector("span").innerText;
+    const isDone = li.querySelector("span").classList.contains("done");
 
     taskSaveArr.push({
       task: textContent,
       done: Boolean(isDone),
-    })
-  })
-  localStorage.setItem("tasks", JSON.stringify(taskSaveArr)); // tasksというキー名で //jSのオブジェクトをJSON形式にパース
-}
+    });
+  });
 
-// 完了、削除ボタンとそれぞれのイベント設定をする関数
+  localStorage.setItem("tasks", JSON.stringify(taskSaveArr));
+};
+
+
+// ===============================
+// タスク要素にイベント設定する処理
+// ===============================
 /** 引数イメージ
  * <li>
  *  <span>a</span>
  *  <button class="btn">完了</button>
- *  <button class="btn">削除</button></li>
+ *  <button class="btn">削除</button>
+ * </li>
  */
-const addTaskHanders = (li) => {
+const addTaskHandlers = (li) => {
   const taskSpan = li.querySelector("span");
-  const doneBtn = li.querySelector("button:nth-of-type(1)") // 親要素の中にある button要素のうち 1番目 を選択する
-  const deleteBtn = li.querySelector("button:nth-of-type(2)") // 親要素の中にある button要素のうち 2番目 を選択する
+  const doneBtn = li.querySelector("button:nth-of-type(1)");
+  const deleteBtn = li.querySelector("button:nth-of-type(2)");
 
+  // 完了ボタンイベント
   doneBtn.addEventListener("click", () => {
     taskSpan.classList.toggle("done");
     saveTasks();
-  })
+  });
 
+  // 削除ボタンイベント
   deleteBtn.addEventListener("click", () => {
     li.remove();
     saveTasks();
-  })
+  });
+};
 
-}
 
-// localStrage読み込み関数
+// ===============================
+// localStorage読み込み処理
+// ===============================
 const loadTasks = () => {
-  const savedTasks = localStorage.getItem("tasks"); // キーの値を呼び出す
+  const savedTasks = localStorage.getItem("tasks");
   if (!savedTasks) return; // 空の時
 
-  const parsed = JSON.parse(savedTasks); //JSONをjSのオブジェクト形式にパース, イメージ{task: 'あ', done: false}
+  const parsed = JSON.parse(savedTasks);
+
   parsed.forEach(taskObj => {
-    // 読み込みデータをもとにページ要素を再構築していく
     const li = document.createElement("li");
+    
     const taskSpan = document.createElement("span");
     taskSpan.textContent = taskObj.task;
+    if (taskObj.done) taskSpan.classList.add("done");
 
-    // doneクラス有無確認, trueなら追加
-    if (taskObj.done) {
-      taskSpan.classList.add("done");
-    }
-
-    // ボタン追加
     const doneBtn = document.createElement("button");
     doneBtn.textContent = "完了";
     doneBtn.classList.add("btn");
@@ -70,30 +85,30 @@ const loadTasks = () => {
     li.appendChild(deleteBtn);
     ul.appendChild(li);
 
-    // ボタンにイベント追加
-    addTaskHanders(li);
+    addTaskHandlers(li);
+  });
+};
 
-  })
-}
 
-// ページ読み込み時にlocalStrage読み込み処理する
+// ===============================
+//イベント設定諸々
+// ===============================
+// ページ読み込み時にlocalStorage読み込み処理する
 document.addEventListener("DOMContentLoaded", loadTasks);
 
-// 素材用意
-const input = document.querySelector(".inputarea");
-const addTaskBtn = document.querySelector("#addtask");
-const ul = document.querySelector("ul");
 
 // Enterでも追加できるように
 input.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    addTaskBtn.click(); // clickされたときと同じ処理を呼び出す
+    addTaskBtn.click();
   }
 });
 
+
+// タスク追加ボタン押下時
 addTaskBtn.addEventListener("click", () => {
-  let inputText = input.value;
-  if (inputText === "") {
+  const inputText = input.value;
+  if (!inputText) {
     alert("タスクを入力してください");
     return;
   }
@@ -101,28 +116,26 @@ addTaskBtn.addEventListener("click", () => {
     alert("タスクは50文字以内にしてください");
     return;
   }
-  // <li>、<span>要素を追加する
+
   const li = document.createElement("li");
-  const taskSpan = document.createElement("span"); // ボタンとテキストを分離させて、長さ調節を細かく行えるようにする
+
+  const taskSpan = document.createElement("span");
   taskSpan.textContent = inputText;
   li.appendChild(taskSpan);
 
   const doneBtn = document.createElement("button");
   doneBtn.textContent = "完了";
-  doneBtn.classList.add("btn"); // class=btnを追加
+  doneBtn.classList.add("btn");
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "削除";
-  deleteBtn.classList.add("btn"); // class=btnを追加
+  deleteBtn.classList.add("btn");
 
   li.appendChild(doneBtn);
   li.appendChild(deleteBtn);
-  ul.appendChild(li) // 完成したli要素をul下に追加
+  ul.appendChild(li);
 
-  // ボタンにイベント追加
-  addTaskHanders(li);
-
-  saveTasks(); // 保存
-  input.value = ""; // タスク追加後、インプット欄を初期化
-})
-
+  addTaskHandlers(li);
+  saveTasks();
+  input.value = "";
+});
